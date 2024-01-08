@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_seller_app/authentication/auth_page.dart';
 import 'package:food_seller_app/global/global.dart';
+import 'package:food_seller_app/pages/home_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -64,9 +65,8 @@ class MyDrawer extends StatelessWidget {
                     "Home",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {
-                    print("Home drawer clicked...");
-                  },
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage())),
                 ),
 
                 // My earning

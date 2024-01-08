@@ -1,22 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:food_seller_app/authentication/auth_page.dart';
 import 'package:food_seller_app/global/global.dart';
+import 'package:food_seller_app/model/items.dart';
 import 'package:food_seller_app/model/menus.dart';
+import 'package:food_seller_app/uploadpage/items_upload_page.dart';
 import 'package:food_seller_app/uploadpage/menu_upload_page.dart';
 import 'package:food_seller_app/widgets/info_design.dart';
+import 'package:food_seller_app/widgets/items_design.dart';
 import 'package:food_seller_app/widgets/my_drawer.dart';
 import 'package:food_seller_app/widgets/text_widget_header.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class ItemPage extends StatefulWidget {
+  final Menus? model;
+  const ItemPage({super.key, this.model});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ItemPage> createState() => _ItemPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ItemPageState extends State<ItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,28 +39,30 @@ class _HomePageState extends State<HomePage> {
         ),
         title: Text(
           sharedPreferences!.getString("name")!,
+          style: const TextStyle(fontSize: 30),
         ),
         centerTitle: true,
-        automaticallyImplyLeading: true,
         actions: [
           IconButton(
               onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const MenuUploadPage())),
+                      builder: (context) => itemsUploadPage(
+                            model: widget.model,
+                          ))),
               icon: const Icon(
-                Icons.post_add,
+                Icons.library_add,
                 color: Colors.white,
               ))
         ],
       ),
-      drawer: const MyDrawer(),
+      drawer: MyDrawer(),
       body: CustomScrollView(
         slivers: [
           SliverPersistentHeader(
             pinned: true,
             delegate: TextWidgetHeader(
-              title: "My Menu",
+              title: widget.model!.menuTitle.toString(),
             ),
           ),
           StreamBuilder<QuerySnapshot>(
@@ -65,6 +70,8 @@ class _HomePageState extends State<HomePage> {
                 .collection("sellers")
                 .doc(sharedPreferences!.getString("uid"))
                 .collection("menus")
+                .doc(widget.model!.menuID)
+                .collection("items")
                 .orderBy("publishedDate", descending: true)
                 .snapshots(),
             builder: ((context, snapshot) {
@@ -78,11 +85,11 @@ class _HomePageState extends State<HomePage> {
                       crossAxisCount: 1,
                       staggeredTileBuilder: (c) => const StaggeredTile.fit(1),
                       itemBuilder: (context, index) {
-                        Menus model = Menus.fromJson(
+                        Items model = Items.fromJson(
                           snapshot.data!.docs[index].data()!
                               as Map<String, dynamic>,
                         );
-                        return InfoDesignWidget(
+                        return ItemsDesignWidget(
                           model: model,
                           context: context,
                         );
