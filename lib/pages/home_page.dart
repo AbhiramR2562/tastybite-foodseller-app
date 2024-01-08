@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_seller_app/authentication/auth_page.dart';
 import 'package:food_seller_app/global/global.dart';
+import 'package:food_seller_app/uploadpage/menu_upload_page.dart';
+import 'package:food_seller_app/widgets/my_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,7 +16,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -28,28 +29,24 @@ class _HomePageState extends State<HomePage> {
                 tileMode: TileMode.clamp),
           ),
         ),
-        title: Text(sharedPreferences!.getString("name")!),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.orange,
-          ),
-          onPressed: () {
-            firebaseAuth.signOut().then((value) {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => AuthPage()));
-            });
-          },
-          child: Text(
-            "Logout",
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
+        title: Text(
+          sharedPreferences!.getString("name")!,
+          style: const TextStyle(fontSize: 30),
         ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MenuUploadPage())),
+              icon: const Icon(
+                Icons.post_add,
+                color: Colors.white,
+              ))
+        ],
       ),
+      drawer: const MyDrawer(),
     );
   }
 }

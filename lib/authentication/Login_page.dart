@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
         showDialog(
           context: context,
           builder: (c) {
-            return const ErrorDialog(message: "on accpunt found");
+            return const ErrorDialog(message: "no record found...");
           },
         );
       }
@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 10),
           Container(
             child: Image.asset(
-              'images/fastfood.png',
+              'images/small-business-store-shop-design-restaurants-vector-44930113-removebg-preview.png',
               height: 230,
             ),
           ),
