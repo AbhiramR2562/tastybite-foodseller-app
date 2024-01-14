@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:food_seller_app/global/global.dart';
 import 'package:food_seller_app/model/menus.dart';
 import 'package:food_seller_app/pages/item_page.dart';
 
@@ -12,6 +15,50 @@ class InfoDesignWidget extends StatefulWidget {
 }
 
 class _InfoDesignWidgetState extends State<InfoDesignWidget> {
+  // // Delete Method
+  deleteMenu(String menuID) {
+    FirebaseFirestore.instance
+        .collection("sellers")
+        .doc(sharedPreferences!.getString("uid"))
+        .collection("menus")
+        .doc(menuID)
+        .delete();
+
+    Fluttertoast.showToast(msg: "Menu Deleted Successfully");
+  }
+
+  // Delete Method with Confirmation Dialog
+  void deleteMenuWithConfirmation(String menuID) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Confirm Delete"),
+            content: const Text("Are you sure you want to delete this menu?"),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Cancel"),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteMenu(menuID);
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  "Delete",
+                  style: TextStyle(
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -25,7 +72,7 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Container(
-          height: 295,
+          height: 300,
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
@@ -41,14 +88,32 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
                 fit: BoxFit.cover,
               ),
               const SizedBox(height: 5),
-              Text(
-                widget.model!.menuTitle!,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  // fontFamily: "Train",
-                ),
+
+              // Title
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.model!.menuTitle!,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      // fontFamily: "Train",
+                    ),
+                  ),
+                  // Delete button
+                  IconButton(
+                    onPressed: () {
+                      deleteMenuWithConfirmation(widget.model!.menuID!);
+                    },
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                  ),
+                ],
               ),
+
               Text(
                 widget.model!.menuInfo!,
                 style: TextStyle(
