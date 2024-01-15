@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:food_seller_app/authentication/auth_page.dart';
 import 'package:food_seller_app/global/global.dart';
+import 'package:food_seller_app/pages/earnings_page.dart';
+import 'package:food_seller_app/pages/history_page.dart';
 import 'package:food_seller_app/pages/home_page.dart';
+import 'package:food_seller_app/pages/new_orders_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -79,9 +82,8 @@ class MyDrawer extends StatelessWidget {
                     " My earning",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {
-                    print("My earning clicked...");
-                  },
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EarningsPage())),
                 ),
 
                 // New Order
@@ -94,25 +96,26 @@ class MyDrawer extends StatelessWidget {
                     "New Order",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {
-                    print("New Order clicked...");
-                  },
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => NewOrdersPage())),
                 ),
 
                 // History - orders
                 ListTile(
-                  leading: const Icon(
-                    Icons.history,
-                    color: Colors.black,
-                  ),
-                  title: const Text(
-                    "History - orders",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onTap: () {
-                    print("History - orders clicked...");
-                  },
-                ),
+                    leading: const Icon(
+                      Icons.history,
+                      color: Colors.black,
+                    ),
+                    title: const Text(
+                      "History - orders",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HistoryPage()));
+                    }),
 
                 // Sign out
                 ListTile(
