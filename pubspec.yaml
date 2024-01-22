@@ -99,6 +99,9 @@ flutter:
     - family: Varela
       fonts:
         - asset: assets/fonts/VarelaRound-Regular.ttf
+    - family: Train
+      fonts:
+        - asset: assets/fonts/TrainOne-Regular.ttf        
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

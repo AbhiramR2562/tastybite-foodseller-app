@@ -23,6 +23,7 @@ class _ItemPageState extends State<ItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(

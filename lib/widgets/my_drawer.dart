@@ -74,31 +74,41 @@ class MyDrawer extends StatelessWidget {
 
                 // My earning
                 ListTile(
-                  leading: const Icon(
-                    Icons.monetization_on,
-                    color: Colors.black,
-                  ),
-                  title: const Text(
-                    " My earning",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EarningsPage())),
-                ),
+                    leading: const Icon(
+                      Icons.monetization_on,
+                      color: Colors.black,
+                    ),
+                    title: const Text(
+                      " My earning",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EarningsPage()));
+                    }),
 
                 // New Order
                 ListTile(
-                  leading: const Icon(
-                    Icons.reorder,
-                    color: Colors.black,
-                  ),
-                  title: const Text(
-                    "New Order",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => NewOrdersPage())),
-                ),
+                    leading: const Icon(
+                      Icons.reorder,
+                      color: Colors.black,
+                    ),
+                    title: const Text(
+                      "New Order",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NewOrdersPage()));
+                    }),
 
                 // History - orders
                 ListTile(
@@ -111,6 +121,8 @@ class MyDrawer extends StatelessWidget {
                       style: TextStyle(color: Colors.black),
                     ),
                     onTap: () {
+                      Navigator.pop(context);
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(

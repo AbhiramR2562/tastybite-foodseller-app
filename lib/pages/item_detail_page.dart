@@ -82,10 +82,13 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            height: 260,
-            child: Image.network(
-              widget.model!.thumbnailUrl.toString(),
-              fit: BoxFit.cover,
+            height: 350,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Image.network(
+                widget.model!.thumbnailUrl.toString(),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           const SizedBox(height: 5),
@@ -126,17 +129,17 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                 deleteItemWithConfirmation(widget.model!.itemID!);
               },
               child: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [
-                        Colors.red,
-                        Colors.red,
-                      ],
-                      begin: FractionalOffset(0.0, 0.0),
-                      end: FractionalOffset(1.0, 0.0),
-                      stops: [0.0, 1.0],
-                      tileMode: TileMode.clamp),
-                ),
+                decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                        colors: [
+                          Colors.red,
+                          Colors.red,
+                        ],
+                        begin: FractionalOffset(0.0, 0.0),
+                        end: FractionalOffset(1.0, 0.0),
+                        stops: [0.0, 1.0],
+                        tileMode: TileMode.clamp),
+                    borderRadius: BorderRadius.circular(12)),
                 width: MediaQuery.of(context).size.width - 40,
                 height: 50,
                 child: const Center(

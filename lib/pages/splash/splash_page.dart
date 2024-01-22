@@ -13,17 +13,17 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  startTimer() {
-    Timer(Duration(seconds: 8), () async {
-      // cheking the seller sign up or not
-      if (firebaseAuth.currentUser != null) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
-      } else {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => AuthPage()));
-      }
-    });
+  startTimer() async {
+    await Future.delayed(Duration(seconds: 8));
+
+    // cheking the seller sign up or not
+    if (firebaseAuth.currentUser != null) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    } else {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => AuthPage()));
+    }
   }
 
   @override
@@ -45,23 +45,33 @@ class _SplashPageState extends State<SplashPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(18.0),
-                child: Image.asset('images/d47baf73869221.5c1845a4b8823.jpg'),
+                child: Image.asset('images/littile-cafe-shop.png'),
               ),
               const SizedBox(
-                height: 10,
+                height: 5,
               ),
               const Padding(
                 padding: EdgeInsets.all(18.0),
                 child: Text(
-                  'Sell Food Online',
+                  'Sell Food Online on',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 40,
+                    fontSize: 26,
                     fontFamily: "Signatra",
                     letterSpacing: 3,
                   ),
                 ),
-              )
+              ),
+              const Text(
+                "Tasty Bite",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontFamily: "Train",
+                  letterSpacing: 3,
+                ),
+              ),
             ],
           ),
         ),

@@ -23,10 +23,13 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
                       model: widget.model,
                     )));
       },
-      splashColor: Colors.amber,
+      splashColor: Colors.blue,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
           height: 295,
           width: MediaQuery.of(context).size.width,
           child: Column(
@@ -58,7 +61,7 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
                   fontSize: 16,
                 ),
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 15),
               Divider(
                 height: 4,
                 thickness: 3,
